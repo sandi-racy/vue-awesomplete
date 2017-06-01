@@ -1,6 +1,6 @@
 {
   "name": "vue-awesomplete",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Vue wrapper for awesomplete",
   "main": "src/VueAwesomplete.vue",
   "scripts": {

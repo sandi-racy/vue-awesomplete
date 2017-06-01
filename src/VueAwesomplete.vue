@@ -1,5 +1,5 @@
 <template lang="jade">
-    input
+    input(type='text')
 </template>
 
 <script>

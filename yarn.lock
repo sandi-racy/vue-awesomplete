@@ -3584,6 +3584,13 @@ void-elements@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
 
+vue-awesomplete@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/vue-awesomplete/-/vue-awesomplete-0.1.1.tgz#78cb8800c3f0b6d6215efa454b5414db1e89e75d"
+  dependencies:
+    awesomplete "^1.1.1"
+    vue "^2.3.3"
+
 vue-hot-reload-api@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.1.0.tgz#9ca58a6e0df9078554ce1708688b6578754d86de"

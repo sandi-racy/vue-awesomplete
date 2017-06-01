@@ -14,7 +14,7 @@ yarn add vue-awesomplete
 
 <script>
   import VueAwesomplete from 'vue-awesomplete'
-  
+
   export default {
     components: {
       VueAwesomplete
@@ -34,6 +34,7 @@ import AwesompleteCss from 'awesomplete/awesomplete.css'
 ## Props
 | Prop            | Type          | Description  |
 | ----------------|:--------------|--------------|
+| ajax-callback   | Function      | Callback for ajax request. It must be return array. |
 | ajax-method     | String        | Set method of ajax request |
 | ajax-url        | String        | Set url of ajax request |
 | close           | Function      | Callback when the popup just closed |

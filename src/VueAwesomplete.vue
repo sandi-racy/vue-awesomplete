@@ -7,6 +7,10 @@
 
     export default {
         props: {
+            ajaxCallback: {
+                type: Function
+            },
+
             ajaxMethod: {
                 type: String,
                 default: 'GET'
@@ -38,11 +42,12 @@
             },
 
             setting: {
-                type: Object
+                type: Object,
+                default: {}
             }
         },
 
-        mounted: function() {
+        mounted() {
             let self = this
             let input = this.$el
 
@@ -52,13 +57,12 @@
                 let ajax = new XMLHttpRequest();
                 ajax.open(this.ajaxMethod, this.ajaxUrl, true);
                 ajax.onload = function() {
-                    let list = JSON.parse(ajax.responseText).map(function(i) {
-                        return i.name
-                    })
+                    let response = JSON.parse(ajax.responseText)
+                    let list = self.ajaxCallback(response)
                     self.setting.list = list
                     new Awesomplete(input, self.setting)
                 };
-                ajax.send();
+                ajax.send()
             }
 
             input.addEventListener('awesomplete-select', this.select)

@@ -43,7 +43,9 @@
 
             setting: {
                 type: Object,
-                default: {}
+                default() {
+                    return {}
+                }
             }
         },
 

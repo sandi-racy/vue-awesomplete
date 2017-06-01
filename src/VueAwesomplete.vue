@@ -51,7 +51,7 @@
             let self = this
             let input = this.$el
 
-            if (this.ajaxUrl == '') {
+            if (this.ajax.url == '') {
                 new Awesomplete(input, this.setting)
             } else {
                 let ajax = new XMLHttpRequest();

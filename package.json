@@ -1,8 +1,8 @@
 {
-  "name": "vue-awesomeplete",
+  "name": "vue-awesomplete",
   "version": "0.1.0",
   "description": "Vue wrapper for awesomplete",
-  "main": "index.js",
+  "main": "src/VueAwesomplete.vue",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -7814,11 +7814,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     data() {
         return {
-            callback: function (response) {
-                return response.map(function (i) {
-                    return i.name;
-                });
+            ajax: {
+                callback: function (response) {
+                    return response.map(function (i) {
+                        return i.name;
+                    });
+                },
+                method: 'GET',
+                url: 'https://restcountries.eu/rest/v1/lang/fr'
             },
+            country: '',
             editor: {
                 select: function () {
                     alert('xy');
@@ -7859,38 +7864,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
-        ajaxCallback: {
-            type: Function
+        ajax: {
+            type: Object,
+            default() {
+                return {
+                    callback: function () {},
+                    method: 'GET',
+                    url: ''
+                };
+            }
         },
 
-        ajaxMethod: {
-            type: String,
-            default: 'GET'
-        },
+        close: Function,
 
-        ajaxUrl: {
-            type: String,
-            default: ''
-        },
+        highlight: Function,
 
-        close: {
-            type: Function
-        },
+        open: Function,
 
-        highlight: {
-            type: Function
-        },
-
-        open: {
-            type: Function
-        },
-
-        select: {
-            type: Function
-        },
+        select: Function,
 
         selectComplete: {
-            type: Function
+            type: Function,
+            default: function () {}
         },
 
         setting: {
@@ -7898,7 +7893,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             default() {
                 return {};
             }
-        }
+        },
+
+        value: String
+    },
+
+    data() {
+        return {
+            internalValue: ''
+        };
     },
 
     mounted() {
@@ -7909,10 +7912,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             new __WEBPACK_IMPORTED_MODULE_0_awesomplete___default.a(input, this.setting);
         } else {
             let ajax = new XMLHttpRequest();
-            ajax.open(this.ajaxMethod, this.ajaxUrl, true);
+            ajax.open(this.ajax.method, this.ajax.url, true);
             ajax.onload = function () {
                 let response = JSON.parse(ajax.responseText);
-                let list = self.ajaxCallback(response);
+                let list = self.ajax.callback(response);
                 self.setting.list = list;
                 new __WEBPACK_IMPORTED_MODULE_0_awesomplete___default.a(input, self.setting);
             };
@@ -7920,10 +7923,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
 
         input.addEventListener('awesomplete-select', this.select);
-        input.addEventListener('awesomplete-selectcomplete', this.selectComplete);
+        input.addEventListener('awesomplete-selectcomplete', () => {
+            self.internalValue = input.value;
+            this.selectComplete();
+        });
         input.addEventListener('awesomplete-open', this.open);
         input.addEventListener('awesomplete-close', this.close);
         input.addEventListener('awesomplete-highlight', this.highlight);
+    },
+
+    watch: {
+        internalValue() {
+            this.$emit('input', this.internalValue);
+        }
+    },
+
+    created() {
+        this.internalValue = this.value;
     }
 });
 
@@ -8180,8 +8196,15 @@ module.exports = Component.exports
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', [_c('vue-awesomplete', {
     attrs: {
-      "ajax-url": "https://restcountries.eu/rest/v1/lang/fr",
-      "ajax-callback": _vm.callback
+      "setting": _vm.setting.editor,
+      "ajax": _vm.ajax
+    },
+    model: {
+      value: (_vm.country),
+      callback: function($$v) {
+        _vm.country = $$v
+      },
+      expression: "country"
     }
   })], 1)
 },staticRenderFns: []}
@@ -8199,8 +8222,23 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('input', {
+    directives: [{
+      name: "model",
+      rawName: "v-model",
+      value: (_vm.internalValue),
+      expression: "internalValue"
+    }],
     attrs: {
       "type": "text"
+    },
+    domProps: {
+      "value": (_vm.internalValue)
+    },
+    on: {
+      "input": function($event) {
+        if ($event.target.composing) { return; }
+        _vm.internalValue = $event.target.value
+      }
     }
   })
 },staticRenderFns: []}

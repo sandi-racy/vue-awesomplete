@@ -78,6 +78,10 @@
             let input = this.$el
 
             if (this.ajax.url) {
+                if (typeof this.ajax.method == 'undefined') {
+                    this.ajax.method = 'GET'
+                }
+
                 let ajax = new XMLHttpRequest();
                 ajax.open(this.ajax.method, this.ajax.url, true);
                 ajax.onload = function() {

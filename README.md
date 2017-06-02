@@ -34,8 +34,10 @@ import AwesompleteCss from 'awesomplete/awesomplete.css'
 You can even set it (or override it) later and it will just work
 ``` bash
 <template>
-  <vue-awesomplete :setting="{ list: ['Html', 'CSS', 'Javascript', 'PHP'] }" ref="skills"></vue-awesomplete>
-  <button @click="changeSkills">Change Skills</button>
+  <div>
+    <vue-awesomplete :setting="{ list: ['Html', 'CSS', 'Javascript', 'PHP'] }" ref="skills"></vue-awesomplete>
+    <button @click="changeSkills">Change Skills</button>
+  </div>
 </template>
 
 <script>
